@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -9,7 +12,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 20s delay linear;
   }
 }
 
@@ -17,15 +20,21 @@
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 20px;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ff6347;
+  text-decoration: underline;
 }
 
 @keyframes App-logo-spin {
@@ -34,5 +43,82 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+nav ul li {
+  margin: 10px 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1e90ff;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: #ff6347;
+  transform: scale(1.1);
+}
+
+.active-link {
+  color: #ff6347;
+}
+
+/* Containers for Components (Home, Profile, Favorites) */
+.home-container, .profile-container, .favorite-container {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 1200px;  /* Limit width for large screens */
+  text-align: left;  /* Align text to the left for readability */
+}
+
+.home-container h1, .profile-container h1, .favorite-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.home-container p, .profile-container p, .favorite-container p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 16px; /* Smaller text for mobile */
+  }
+
+  .home-container, .profile-container, .favorite-container {
+    padding: 15px;
+  }
+
+  nav ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 5px 0;
+  }
+
+  .App-logo {
+    height: 30vmin; /* Adjust logo size for smaller screens */
+  }
+
+  .description-container {
+    width: 100%; /* Ensure description takes full width */
   }
 }

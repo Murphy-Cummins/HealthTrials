@@ -1,0 +1,75 @@
+.favorite-container {
+    padding: 20px;
+    background-color: bisque;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 20px;
+}
+
+.favorite-container h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.favorite-container ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.favorite-container li {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.favorite-container button {
+    background-color: #4CAf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.favorite-container button:hover {
+    background-color: #45a049;
+}
+
+.favorite-container ul li span {
+  flex: 1;
+  padding-left: 10px;
+}
+
+.remove-button {
+  background-color: #ff4d4d;  /* Red button for remove */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;  /* Initially hidden */
+  position: relative;
+  left: 100%;  /* Place it outside the list item */
+}
+
+.favorite-item:hover .remove-button {
+  opacity: 1;  /* Show button on hover */
+  left: 5px;   /* Slide it back in when hovering over the item */
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
