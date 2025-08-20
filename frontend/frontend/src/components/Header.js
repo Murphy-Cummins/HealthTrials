@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './Home';
 import Profile from './Profile';
+import Favorites from "./Favorites";
+import ImageSwitcher from "./ImageSwitcher";
 
 const Header = () => {
     return (
@@ -19,7 +21,9 @@ const Header = () => {
                <Routes>
                  <Route path="/" element={<Home />} />
                  <Route path="/profile" element={<Profile />} />
+                 <Route path="/favorites" element={<Favorites />} />
                </Routes>
+               <ImageSwitcher />
              </div>
         </Router> 
     );
