@@ -10,12 +10,36 @@ const Header = () => {
         <Router>
             <div className="Header">
                {/* Navigation Links to the user's favorite trials and profile*/}
-               <nav>
-                 <ul>
-                   <li><Link to="/">Home</Link></li>
-                   <li><Link to="/profile">Profile</Link></li>
-                 </ul>
-               </nav>
+               <nav style={
+                {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  height: '50px',
+                }
+               }>
+                <div style={ 
+                  {
+                    position: 'absolute',
+                    left: '20px',
+                  }
+                }>
+                <button>Login</button>
+                </div>
+                 <ul style={
+                  {
+                    display: 'flex',
+                    listStyle: 'none',
+                    gap: '20px',
+                    margin: 0,
+                    padding: 0,
+                  }
+                 }>
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/profile">Profile</Link></li>
+                  </ul>
+                 </nav>
 
                <ImageSwitcher/>
                {/* Routing Setup */}
