@@ -2,20 +2,35 @@ import React, { useState } from "react";
 import '../styles/UserInput.css';
 
 function UserInput () {
+
+    const [createUserProfile, setUserProfile] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         age: '',
         conditions: '',
         email: '',
+        password: ''
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type , checked } = e.target;
 
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+        if (type === 'checkbox') {
+            setUserProfile(checked);
+            console.log('Creating profile:', createUserProfile);
+
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]:value
+            }));
+        }
+        else {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
@@ -26,10 +41,12 @@ function UserInput () {
             name: '',
             age: '',
             conditions: '',
-            email: ''
+            email: '',
+            password: ''
         });
 
         alert('Form submitted!');
+        setUserProfile(false);
     };
 
 return (
@@ -55,6 +72,20 @@ return (
             <div className="column">
             <label>Email:</label>            
             <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+            </div>
+
+            <div className="column">
+                <label>Create a User Profile</label>
+                <input type="checkbox" checked={createUserProfile} onChange={handleChange} />
+            </div>
+
+            <div className="column">
+                {createUserProfile && (
+                    <>
+                    <label>Password:</label>
+                    <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+                    </>
+                )}
             </div>
 
             <button type="submit">Submit</button>

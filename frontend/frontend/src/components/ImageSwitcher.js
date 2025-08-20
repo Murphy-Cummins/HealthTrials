@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
+import '../styles/App.css';
 import Laughing from '../Pictures/Laughing.jpg';
 import HighFive from '../Pictures/PatientHighFive.jpg';
 import Smiling from '../Pictures/Smiling.jpg';
@@ -26,16 +27,27 @@ function ImageSwitcher () {
     }
 
     return (
-        <div className ="centered-container">
-            <img src={image} alt="Page Banner" style={
-                {   width:'300px',
-                    height: 'auto',
-                    marginTop: '20px',
-                    borderRadius: '8px',
+        <div className ="centered-image" style={
+            {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: 0,
+                padding: 0,
+            }
+        }>
+    <img src={image} alt="Centered" style={
+                {   
+                    height: '400px',
+                    width: 'auto',
+                    display: 'block',
+                    margin: 0,
+                    padding: 0,
+                    fontFamily: 'sans-serif',
                 }
             }
-            />
-        </div>
+    />
+    </div>
     );
 }
 

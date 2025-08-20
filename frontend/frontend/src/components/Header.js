@@ -16,14 +16,14 @@ const Header = () => {
                    <li><Link to="/profile">Profile</Link></li>
                  </ul>
                </nav>
-       
+
+               <ImageSwitcher/>
                {/* Routing Setup */}
                <Routes>
                  <Route path="/" element={<Home />} />
                  <Route path="/profile" element={<Profile />} />
                  <Route path="/favorites" element={<Favorites />} />
                </Routes>
-               <ImageSwitcher />
              </div>
         </Router> 
     );

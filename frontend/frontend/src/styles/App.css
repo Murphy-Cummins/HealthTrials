@@ -81,6 +81,15 @@ nav a:hover {
 
   .home-container, .profile-container, .favorite-container {
     padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: auto;
+    display: block;
+    font-style: sans-serif;
   }
 
   nav ul {
