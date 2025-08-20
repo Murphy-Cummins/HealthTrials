@@ -6,6 +6,8 @@ import Laughing from '../Pictures/Laughing.jpg';
 import HighFive from '../Pictures/PatientHighFive.jpg';
 import Smiling from '../Pictures/Smiling.jpg';
 import Testing from '../Pictures/Testing.jpg';
+import Form from '../Pictures/Form.jpg';
+import Hand from '../Pictures/Hand.jpg';
 
 function ImageSwitcher () {
     const location = useLocation();
@@ -20,10 +22,10 @@ function ImageSwitcher () {
             image = HighFive;
             break;
         case '/create':
-            image = Smiling;
+            image = Form;
             break;
         case '/favorites':
-            image = Testing;
+            image = Hand;
             break;
         case '/login':
             image = Testing;

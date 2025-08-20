@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/App.css';
 
 function CreateLogin () {
 
@@ -42,7 +43,7 @@ function CreateLogin () {
 
         }
     return (
-        <div>
+        <div className ="form-container">
             <h2>Create Your Profile</h2>
             <form onSubmit={handleSubmit}> 
             
