@@ -5,9 +5,11 @@ import Header from './components/Header';
 
 //import style sheer
 import './styles/App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
+    <Router>
     <div className="centered-container">
       <div className="app-container">
         <main className="app-main">
@@ -22,6 +24,7 @@ function App() {
         </footer>
       </div>
       </div>
+      </Router>
   );
 }
 

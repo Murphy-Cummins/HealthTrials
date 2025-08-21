@@ -1,13 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Home from './Home';
 import Profile from './Profile';
 import Favorites from "./Favorites";
+import Login from "./Login";
 import ImageSwitcher from "./ImageSwitcher";
 
 const Header = () => {
+
+  const navigate = useNavigate();
+
     return (
-        <Router>
             <div className="Header">
                {/* Navigation Links to the user's favorite trials and profile*/}
                <nav style={
@@ -25,7 +28,7 @@ const Header = () => {
                     left: '20px',
                   }
                 }>
-                <button>Login</button>
+                <button onClick={() => navigate('/login')}>Login</button>
                 </div>
                  <ul style={
                   {
@@ -47,9 +50,9 @@ const Header = () => {
                  <Route path="/" element={<Home />} />
                  <Route path="/profile" element={<Profile />} />
                  <Route path="/favorites" element={<Favorites />} />
+                 <Route path="/login" element={<Login />} />
                </Routes>
              </div>
-        </Router> 
     );
 }
 

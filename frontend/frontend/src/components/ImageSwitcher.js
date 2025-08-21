@@ -22,6 +22,9 @@ function ImageSwitcher () {
         case '/favorites':
             image = Testing;
             break;
+        case '/login':
+            image = Testing;
+            break;
         default:
             image = Smiling;
     }
