@@ -19,6 +19,9 @@ function ImageSwitcher () {
         case '/profile':
             image = HighFive;
             break;
+        case '/create':
+            image = Smiling;
+            break;
         case '/favorites':
             image = Testing;
             break;

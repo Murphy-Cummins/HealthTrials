@@ -4,6 +4,7 @@ import Home from './Home';
 import Profile from './Profile';
 import Favorites from "./Favorites";
 import Login from "./Login";
+import CreateLogin from "./CreateLogin";
 import ImageSwitcher from "./ImageSwitcher";
 
 const Header = () => {
@@ -29,6 +30,7 @@ const Header = () => {
                   }
                 }>
                 <button onClick={() => navigate('/login')}>Login</button>
+                <button onClick={() => navigate('/create')}>Create a Profile</button>
                 </div>
                  <ul style={
                   {
@@ -51,6 +53,7 @@ const Header = () => {
                  <Route path="/profile" element={<Profile />} />
                  <Route path="/favorites" element={<Favorites />} />
                  <Route path="/login" element={<Login />} />
+                 <Route path="/create" element={<CreateLogin />} />
                </Routes>
              </div>
     );
