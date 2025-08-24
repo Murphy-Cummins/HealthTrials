@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TrialItem from "./TrialItem";
 import '../styles/UserInput.css';
 
 function UserInput () {
@@ -12,6 +13,8 @@ function UserInput () {
         email: '',
         password: ''
     });
+
+    const [submittedConditions, setSubmittedConditions] = useState ('');
 
     const handleChange = (e) => {
         const { name, value, type , checked } = e.target;
@@ -37,6 +40,8 @@ function UserInput () {
         e.preventDefault();
         console.log('User Form Submitted:', formData);
 
+        setSubmittedConditions(formData.conditions);
+     
         setFormData({
             name: '',
             age: '',
@@ -45,8 +50,11 @@ function UserInput () {
             password: ''
         });
 
-        alert('Form submitted!');
+        //alert(formData.conditions);
         setUserProfile(false);
+        setSubmittedConditions(formData.conditions);
+
+       // alert(submittedConditions);
     };
 
 return (
@@ -90,6 +98,13 @@ return (
 
             <button type="submit">Submit</button>
         </form>
+
+        {submittedConditions && (
+            <div className="trials-section">
+                <h3>Matching Clinical Trials</h3>
+                <TrialItem conditions={submittedConditions} />
+                </div>
+        )} 
     </div>
 );
 }
