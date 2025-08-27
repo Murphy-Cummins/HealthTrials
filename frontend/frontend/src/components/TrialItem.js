@@ -29,14 +29,20 @@ const TrialItem = ({conditions}) => {
                 //(`Calling: ${url}?${queryString}`)
                 const studies = response.data.StudyFieldsResponse.StudyFields;
                 //setTrials(studies);
+                console.log(`Trials fetched for "${condition}".`);
+
+                if (studies.length==0) {
+                    console.warn(`No trials found for condition "${condition}":`);
+                }
                 allTrials= [...allTrials, ...studies];
-                alert(trials);
+                
             } catch (error) {
-                console.error(`Error fetching trials fo ${condition}:`, error);
-                setTrials(allTrials);
+                console.error(`Error fetching trials for ${condition}:`, error);
+                alert(error);
             }
         }
-        //setTrials(allTrials);
+        console.log('All combined trials:', allTrials);
+        setTrials(allTrials);
         setLoading(false);
         };
 
@@ -52,7 +58,6 @@ const TrialItem = ({conditions}) => {
                 fetchTrials(conditionArray);
             }
 
-            fetchTrials();
         }, [conditions]);
 
         //commenting out irrelevent code
