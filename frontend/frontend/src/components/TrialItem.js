@@ -9,96 +9,100 @@ const TrialItem = ({conditions}) => {
 
     const fetchTrials = async (conditionsArray) => {
         setLoading (true);
-        let allTrials = [];
+        let allRows = [];
 
         for(const condition of conditionsArray){
             try {
-                const response = await axios.get('https://clinicaltrials.gov/api/query/study_fields', {
-                    params: {
-                        expr: condition,
-                        fields: 'NCTId,BriefTitle,Condition,LocationCountry',
-                        min_rnk: 1,
-                        max_rnk: 10,
-                        fmt: 'json'
-                    }
-                });
-
-                console.log('API response for', condition, response.data);
-                console.log(condition);
-
-                //(`Calling: ${url}?${queryString}`)
-                const studies = response.data.StudyFieldsResponse.StudyFields;
-                //setTrials(studies);
-                console.log(`Trials fetched for "${condition}".`);
-
-                if (studies.length==0) {
-                    console.warn(`No trials found for condition "${condition}":`);
+                const url = `https://clinicaltrials.gov/api/v2/studies?query.cond=${encodeURIComponent(
+                            condition
+                            )}&pageSize=5&format=csv`;
+                console.log('Fetching:', url);
+                const response = await fetch(url);
+                if(!response.ok){
+                    throw new Error(`HTTP error: ${response.status}`);
                 }
-                allTrials= [...allTrials, ...studies];
-                
+
+                const text = await response.text();
+                const rows = text.trim().split('\n');
+
+                if(allRows.length > 0) {
+                    allRows.push(...rows.slice(1));
+                } else {
+                    allRows.push(...rows);
+                }
+
             } catch (error) {
                 console.error(`Error fetching trials for ${condition}:`, error);
-                alert(error);
             }
         }
-        console.log('All combined trials:', allTrials);
-        setTrials(allTrials);
+
+        const header = allRows[0];
+        const filterRows = [header, ...allRows.slice(1).filter(row => {
+            const cells = row.split(',');
+            const id = cells[0]?.trim() || '';
+            return id.startsWith('NCT');
+        })]
+
+        setTrials(filterRows);
         setLoading(false);
-        };
+
+    };
 
         useEffect(() => {
-            if(!conditions) return;
+            if (!conditions) return;
 
             const conditionArray = conditions
             .split(',')
-            .map((c)=> c.trim())
+            .map((c) => c.trim())
             .filter(Boolean);
 
-            if (conditionArray.length >0) {
+            if (conditionArray.length > 0) {
                 fetchTrials(conditionArray);
             }
-
         }, [conditions]);
 
-        //commenting out irrelevent code
-        //const handleSubmit = (e) => {
-          //  e.preventDefault();
-            //const conditionArray = conditions
-            //.split(',')
-            //.map((c)=>c.trim())
-            //.filter(Boolean);
+          return (
+    <div style = {{ fontFamily: 'Arial, sans-serif', fontSize: '14px'}}>
+        <h3 style = {{ marginBottom: '10px'}}>Results</h3>
 
-      //      if(conditionArray.length>0) {
-     //           fetchTrials(conditionArray);
-     //       }
-     //   };
+      {loading && <p>Loading trials...</p>}
 
-        return (
-            <div>
-                <h3>Search Clincical Trials</h3>
-
-                {loading && <p>Loading trials...</p>}
-                {!loading && (trials.length >0) && (
-                    <ul>
-                        {trials.map((trial, index) => (
-                            <li key={index}>
-                                <strong>
-                                    {trial.BriefTitle?.[0]}
-                                </strong><br/>
-                                Condition: {trial.Condition?.join(', ') || 'N/A'} <br />
-                                NCT ID: {trial.NCTId?.[0]}<br/>
-                                Location: {trial.LocationCountry?.join(', ') || 'N/A'}
-                            </li>
+      {!loading && trials.length > 1 && (
+        <div style = {{ overflow: 'auto'}}>
+          <table style = {{
+            width: '100%',
+            borderCollapse: 'collapse',
+            fontSize: '13px',
+            border: '1px solid #ddd'
+          }}>
+            <thead style = {{ background: '#f0f0f0'}}>
+                <tr>{trials[0].split(',').map((header, i) => (
+                    <th key ={i} style = {{ padding: '6px', border: '1px solid #ddd', textAlign: 'left'}}>
+                       {header}
+                    </th>
+                ))}
+                </tr>
+            </thead>
+            <tbody>
+                {trials.slice(1).map((row, idx) => (
+                    <tr key = {idx}>
+                        {row.split(',').map((cell, i) => (
+                            <td key = {i} style = {{ padding: '6px', border: '1px solid #eee'}}>
+                                {cell}
+                            </td>
                         ))}
-                    </ul>
+                    </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-                )}
-                
-                {!loading && trials.length === 0 && (
-                    <p>No trials found for the enerted conditions.</p>
-                )}
-            </div>
-        );
+      {!loading && trials.length <= 1 && conditions && (
+        <p style = {{ color: 'gray' }}>No trials found for the entered conditions.</p>
+      )}
+    </div>
+  );
+
 };
-
 export default TrialItem;
